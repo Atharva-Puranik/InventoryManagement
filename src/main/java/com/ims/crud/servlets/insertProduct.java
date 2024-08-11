@@ -1,4 +1,4 @@
-package servlets;
+package com.ims.crud.servlets;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,9 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import DAO.productDAO;
-import models.Inventory;
-import models.Product;
+import com.ims.crud.DAO.productDAO;
+import com.ims.crud.models.Inventory;
+import com.ims.crud.models.Product;
 
 @WebServlet("/insertProduct")
 public class insertProduct extends HttpServlet {

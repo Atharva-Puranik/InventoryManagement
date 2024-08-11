@@ -1,4 +1,4 @@
-package configurations;
+package com.ims.crud.configs;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -12,7 +12,4 @@ public class dbConnection {
 		return session;
 	}
 	
-	
-	
-
 }

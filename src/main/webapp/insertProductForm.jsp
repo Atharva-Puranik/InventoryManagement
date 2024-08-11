@@ -18,6 +18,5 @@
 		<input type="submit" name="Submit">
 		<input type="reset" name="Reset">
 	</form>
-
 </body>
 </html>

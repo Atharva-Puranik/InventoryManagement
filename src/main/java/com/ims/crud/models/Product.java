@@ -1,4 +1,4 @@
-package models;
+package com.ims.crud.models;
 
 import javax.persistence.*;
 
