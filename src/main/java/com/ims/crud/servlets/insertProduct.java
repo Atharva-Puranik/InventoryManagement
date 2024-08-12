@@ -31,7 +31,10 @@ public class insertProduct extends HttpServlet {
 		i.setProduct(p);
 		
 		productDAO.insertProduct(p);
-		
+		response.setContentType("text/html");
+		response.getWriter().println("<b>Added Product</b>");
+		request.getRequestDispatcher("homePage.jsp").include(request, response);
+
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

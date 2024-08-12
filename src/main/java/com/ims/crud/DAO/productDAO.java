@@ -17,15 +17,13 @@ public class productDAO {
 		session.beginTransaction();
 		session.save(product);
 		session.getTransaction().commit();
-
-		session.close();
 	}
 
 	public static List<Product> fetchAllProducts() {
 		session.beginTransaction();
 		String SELECT_ALL_PRODUCTS = "FROM Product";
 		List<Product> result =  session.createQuery(SELECT_ALL_PRODUCTS,Product.class).list();
-		session.close();
+		session.getTransaction().commit();
 		return result;
 	}
 

@@ -9,7 +9,9 @@
 <body>
 	<h2>--IMS Homepage--</h2>
 	<a href="displayAllProducts">Display all Products</a>
-	<a href="insertProduct">Insert a Product</a>
+	<a href="insertProductForm.jsp">Insert a Product</a>
+	<a href="userRequest.jsp">Make a request</a>
+	<a href="AdminRequest">Check requests</a>
 	<!-- <a href=""></a> -->
 
 </body>
