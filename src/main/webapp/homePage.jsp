@@ -10,6 +10,7 @@
 	<h2>--IMS Homepage--</h2>
 	<a href="displayAllProducts">Display all Products</a>
 	<a href="insertProductForm.jsp">Insert a Product</a>
+
 	<!-- <a href=""></a> -->
 
 </body>

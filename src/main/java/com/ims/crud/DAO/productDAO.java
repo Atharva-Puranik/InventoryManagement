@@ -14,6 +14,7 @@ import com.ims.crud.models.Product;
 public class productDAO {
 
 	public static void insertProduct(Product product) {
+<<<<<<< HEAD
 		try (Session session = dbConnection.initDatabase()) {
 			session.beginTransaction();
 			
@@ -38,6 +39,7 @@ public class productDAO {
 			e.printStackTrace();
 		}
 		return null;
+
 	}
 
 	public static boolean updateProductRecord(Product productWithUpdatedDetails,int productQuantity, int updateId) {
