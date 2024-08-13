@@ -39,7 +39,9 @@ public class Inventory {
 	public Inventory() {
 		
 	}
-	
-	
 
+	@Override
+	public String toString() {
+		return "Inventory [inventory_id=" + inventory_id + ", quantity=" + quantity + ", product=" + product + "]";
+	}
 }

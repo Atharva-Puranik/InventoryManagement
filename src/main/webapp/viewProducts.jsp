@@ -29,8 +29,8 @@
 			<td><%= product.getProductName() %></td>
 			<td><%= product.getCategory() %></td>
 			<td><%= product.getInventory().getQuantity() %></td>
-			<td><a href=""></a></td>
-			<td></td>
+			<td><a href='findProduct?productId=<%= product.getProductId()%>'>Update</a></td>
+			<td><a href='deleteProduct?productId=<%= product.getProductId()%>'>Delete</a></td>
 		</tr>
 		<%}%>
 	</table>

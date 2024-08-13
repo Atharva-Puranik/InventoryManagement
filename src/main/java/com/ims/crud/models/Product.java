@@ -15,7 +15,7 @@ public class Product {
 	
 	@OneToOne(mappedBy = "product" ,cascade = CascadeType.ALL)
 	Inventory inventory;
-	
+
 	public Inventory getInventory() {
 		return inventory;
 	}
@@ -52,8 +52,31 @@ public class Product {
 		this.category = category;
 	}
 	
+	public Product(int productId, String productName, String category, Inventory inventory) {
+		super();
+		this.productId = productId;
+		this.productName = productName;
+		this.category = category;
+		this.inventory = inventory;
+	}
+	
+	public Product(int productId, String productName, String category) {
+		super();
+		this.productId = productId;
+		this.productName = productName;
+		this.category = category;
+	}
+
+
 	public Product() {
 		
+	}
+
+
+	@Override
+	public String toString() {
+		return "Product [productId=" + productId + ", productName=" + productName + ", category=" + category
+				+ ", inventory=" + inventory + "]";
 	}
 	
 }

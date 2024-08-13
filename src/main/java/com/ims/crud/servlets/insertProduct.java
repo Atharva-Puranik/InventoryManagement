@@ -1,6 +1,8 @@
 package com.ims.crud.servlets;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,6 +33,8 @@ public class insertProduct extends HttpServlet {
 		i.setProduct(p);
 		
 		productDAO.insertProduct(p);
+		
+		response.sendRedirect("insertProductForm.jsp");
 		
 	}
 

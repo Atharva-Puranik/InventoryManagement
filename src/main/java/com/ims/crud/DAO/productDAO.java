@@ -2,40 +2,117 @@ package com.ims.crud.DAO;
 
 import java.util.List;
 
+
 import org.hibernate.Session;
 
-import org.hibernate.query.*;
+import org.hibernate.Transaction;
 
 import com.ims.crud.configs.dbConnection;
+import com.ims.crud.models.Inventory;
 import com.ims.crud.models.Product;
 
 public class productDAO {
 
-	static Session session = dbConnection.initDatabase();
-
 	public static void insertProduct(Product product) {
-		session.beginTransaction();
-		session.save(product);
-		session.getTransaction().commit();
+		try (Session session = dbConnection.initDatabase()) {
+			session.beginTransaction();
+			
+			
 
-		session.close();
+			session.save(product);
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
 	}
 
 	public static List<Product> fetchAllProducts() {
-		session.beginTransaction();
-		String SELECT_ALL_PRODUCTS = "FROM Product";
-		List<Product> result =  session.createQuery(SELECT_ALL_PRODUCTS,Product.class).list();
-		session.close();
-		return result;
+		try (Session session = dbConnection.initDatabase()) {
+
+			session.beginTransaction();
+			List<Product> result = session.createQuery(dbConnection.HQL_SELECT_ALL_PRODUCTS, Product.class).list();
+			return result;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return null;
 	}
 
-	public static Product updateProductRecord(int updateId) {
-		Product p = new Product();
-		return p;
+	public static boolean updateProductRecord(Product productWithUpdatedDetails,int productQuantity, int updateId) {
+		try (Session session = dbConnection.initDatabase()){
+			session.beginTransaction();
+			
+			Product product = session.get(Product.class, updateId);
+
+            if (product != null) {
+                product.setProductName(productWithUpdatedDetails.getProductName());
+                product.setCategory(productWithUpdatedDetails.getCategory());
+
+                Inventory inventory = product.getInventory();
+                if (inventory != null) {
+                    inventory.setQuantity(productQuantity);
+                } else {
+                    inventory = new Inventory();
+                    inventory.setQuantity(productQuantity);
+                    inventory.setProduct(product);
+                    product.setInventory(inventory);
+                }
+
+                session.saveOrUpdate(product);
+                
+                session.getTransaction().commit();
+                
+                return true;
+            } else {
+            	return false;
+            }
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return false;
+		
 	}
 
-	public static void deleteProductRecord(int deleteId) {
+	public static boolean deleteProductRecord(int deleteId) {
+		try (Session session = dbConnection.initDatabase()) {
+			session.beginTransaction();
+			Product p = findProductById(deleteId);
+			session.delete(p);
+			session.getTransaction().commit();
 
+			return true;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	public static Product findProductById(int productId) {
+		try (Session session = dbConnection.initDatabase()) {
+			session.beginTransaction();
+			Product productToBeUpdated = session.find(Product.class, productId);
+			return productToBeUpdated;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public static Product findProductByName(String productName) {
+		try (Session session = dbConnection.initDatabase()) {
+			session.beginTransaction();
+			Product product = session.find(Product.class, productName);
+			return product;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }
