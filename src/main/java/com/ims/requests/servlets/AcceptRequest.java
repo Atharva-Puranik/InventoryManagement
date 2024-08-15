@@ -13,18 +13,22 @@ import com.ims.requests.DAO.AdminRequestDAO;
 public class AcceptRequest extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("Accept servlet");
+		response.setContentType("text/html");
 		int requestId = Integer.parseInt(request.getParameter("id"));
 		int requestQuantity = AdminRequestDAO.getRequestQuantity(requestId);
+		System.out.println("request quantity: " + requestQuantity);
 		int inventoryQuantity = AdminRequestDAO.getInventoryQuantity(requestId);
+		System.out.println("inventory quantity: " +inventoryQuantity);
 		if(inventoryQuantity > requestQuantity) {
 			//updateProduct.java
+			response.getWriter().println("request accepted");
 			AdminRequestDAO.deleteRequest(requestId);
 		}
 		else {
-			response.setContentType("text.html");
 			response.getWriter().println("Not enough quantity in inventory!");
 		}
-		request.getRequestDispatcher("homePage.jsp").include(request, response);
+		request.getRequestDispatcher("AdminRequest").include(request, response);
 	}
 
 }

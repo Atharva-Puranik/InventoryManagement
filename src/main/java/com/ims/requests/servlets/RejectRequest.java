@@ -17,9 +17,7 @@ public class RejectRequest extends HttpServlet {
 		int requestId = Integer.parseInt(request.getParameter("id"));
 		System.out.println(requestId);
 		AdminRequestDAO.deleteRequest(requestId);
-		response.setContentType("text/html");
-		response.getWriter().println("Deleted Successfully!");
-		request.getRequestDispatcher("homePage.jsp").include(request, response);
+		response.sendRedirect("AdminRequest");
 	}
 
 }

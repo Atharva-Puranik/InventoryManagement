@@ -8,10 +8,10 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Admin Requests</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
-<table>
-		<caption>All Requests</caption>
+<table class="table table-bordered border-primary">
 		<tr>
 			<th>Name</th>
 			<th>Quantity</th>
@@ -27,10 +27,10 @@
 			%></td>
 			<td><%= req.getQuantity() %></td>
 			<td><% 
-			response.setContentType("text.html");
+			response.setContentType("text/html");
 			out.println("<a href='AcceptRequest?id=" + req.getRequestId() + "'>Accept</a>");%></td>
 			<td><% 
-			response.setContentType("text.html");
+			response.setContentType("text/html");
 			out.println("<a href='RejectRequest?id=" + req.getRequestId() + "'>Reject</a>");%></td>
 		</tr>
 		<%}%>

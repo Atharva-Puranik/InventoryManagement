@@ -51,7 +51,7 @@ public class AdminRequestDAO {
 	public static int getInventoryQuantity(int requestId) {
 		try(Session session = dbConnection.initDatabase()){			
 			session.beginTransaction();
-			String hql = "Select quantity FROM Product WHERE productId=(SELECT productId from Requests where requestId=:id)";
+			String hql = "Select quantity FROM Inventory WHERE product_productId=(SELECT productId from Requests where requestId=:id)";
 			Query<Integer> query = session.createQuery(hql, Integer.class);
 			query.setParameter("id", requestId);
 			List<Integer> results = query.list();
