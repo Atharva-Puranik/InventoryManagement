@@ -4,7 +4,8 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Insert Product</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
 	<h1>Provide Product Details</h1>
@@ -18,6 +19,5 @@
 		<input type="submit" name="Submit">
 		<input type="reset" name="Reset">
 	</form>
-	<a href="homePage.jsp">Home</a>
 </body>
 </html>

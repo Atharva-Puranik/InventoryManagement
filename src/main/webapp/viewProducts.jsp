@@ -6,13 +6,13 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>All Products</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
 	<%
 		List<Product> productsList = (List<Product>) request.getAttribute("productsList");
 	%>
-
 	<table>
 		<caption>All Products</caption>
 		<tr>

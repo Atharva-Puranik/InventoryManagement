@@ -6,7 +6,8 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Update Product</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
 	<%
@@ -14,7 +15,7 @@
 	%>
 	<h1>Provide Product Details</h1>
 	<form action="updateProduct" method="get">
-		<input type="text" name="productId" value=<%=p.getProductId() %>></input><br>
+		<input type="text" name="productId" hidden value=<%=p.getProductId() %>></input><br>
 		<label for="productName">Product Name:</label>
 		<input type="text" name="productName" value=<%=p.getProductName() %>></input><br>
 		<label for="productCategory">Product Category:</label>
@@ -24,7 +25,6 @@
 		<input type="submit" name="Submit">
 		<input type="reset" name="Reset">
 	</form>
-	<a href="homePage.jsp">Home</a>
 	
 </body>
 </html>

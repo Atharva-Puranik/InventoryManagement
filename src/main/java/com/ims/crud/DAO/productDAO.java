@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.hibernate.Session;
 
-import org.hibernate.Transaction;
 
 import com.ims.crud.configs.dbConnection;
 import com.ims.crud.models.Inventory;
@@ -14,13 +13,25 @@ import com.ims.crud.models.Product;
 public class productDAO {
 
 	public static void insertProduct(Product product) {
-<<<<<<< HEAD
 		try (Session session = dbConnection.initDatabase()) {
+			boolean updated = false;
 			session.beginTransaction();
+			List<Product> allProducts = productDAO.fetchAllProducts();
 			
-			
-
-			session.save(product);
+			for (Product prod : allProducts) {
+				boolean nameExists = product.getProductName().equalsIgnoreCase(prod.getProductName());
+				boolean categoryExists = product.getCategory().equalsIgnoreCase(prod.getCategory());
+				if(nameExists && categoryExists) {
+					int updatedQuantity = prod.getInventory().getQuantity() + product.getInventory().getQuantity();
+					productDAO.updateProductRecord(product, updatedQuantity, prod.getProductId());
+					updated = true;
+					break;
+				}
+				
+			}
+			if(!updated) {
+				session.save(product);
+			}
 			session.getTransaction().commit();
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -30,16 +41,15 @@ public class productDAO {
 
 	public static List<Product> fetchAllProducts() {
 		try (Session session = dbConnection.initDatabase()) {
-
 			session.beginTransaction();
-			List<Product> result = session.createQuery(dbConnection.HQL_SELECT_ALL_PRODUCTS, Product.class).list();
+			String SELECT_ALL_PRODUCTS = "FROM Product";
+			List<Product> result =  session.createQuery(SELECT_ALL_PRODUCTS,Product.class).list();
 			return result;
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
 		return null;
-
 	}
 
 	public static boolean updateProductRecord(Product productWithUpdatedDetails,int productQuantity, int updateId) {
@@ -71,11 +81,9 @@ public class productDAO {
             	return false;
             }
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 		}
 		return false;
-		
 	}
 
 	public static boolean deleteProductRecord(int deleteId) {
@@ -87,7 +95,6 @@ public class productDAO {
 
 			return true;
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 		}
 		return false;
@@ -99,7 +106,6 @@ public class productDAO {
 			Product productToBeUpdated = session.find(Product.class, productId);
 			return productToBeUpdated;
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 		}
 		return null;
@@ -111,7 +117,6 @@ public class productDAO {
 			Product product = session.find(Product.class, productName);
 			return product;
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 		}
 		return null;
